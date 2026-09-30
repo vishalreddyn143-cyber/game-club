@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Sarathi: The Path of Resilience | Interactive Prototype</title>
+  <meta name="description" content="An interactive mobile educational game prototype rooted in the Mahabharata, teaching students mental resilience, emotional intelligence, and growth mindset through Lord Krishna's guidance.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Cinzel:wght@600;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Ambient Background Glows -->
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+  <div class="ambient-glow glow-3"></div>
+
+  <!-- Main Container / Device Frame Wrapper -->
+  <div class="app-wrapper">
+    <!-- Header Bar for Presentation Context -->
+    <header class="presentation-header">
+      <div class="badge-tag">STUDENT INNOVATION PROTOTYPE • MAHABHARATA SEL</div>
+      <h1 class="proto-title">SARATHI <span>सारथी</span></h1>
+      <p class="proto-subtitle">The Path of Resilience • Interactive Mobile Experience</p>
+      
+      <div class="presentation-controls">
+        <button id="toggleAudioBtn" class="pill-btn" title="Toggle Calm Soundscape">
+          <span class="icon">🔔</span> <span id="audioLabel">Sound: OFF</span>
+        </button>
+        <button id="viewGddBtn" class="pill-btn highlight" title="View Game Design Document Info">
+          <span class="icon">📜</span> <span>GDD Info</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Mobile Device Frame -->
+    <div class="mobile-device-frame" id="deviceFrame">
+      <div class="phone-speaker"></div>
+      <div class="phone-camera"></div>
+
+      <!-- In-Phone App Screen Viewport -->
+      <main class="phone-viewport" id="phoneViewport">
+        
+        <!-- Persistent Top Status Bar -->
+        <div class="mobile-status-bar">
+          <span class="status-time">09:45</span>
+          <div class="status-notch"></div>
+          <div class="status-icons">
+            <span class="cell-sig">●●●●</span>
+            <span class="wifi">WiFi</span>
+            <span class="battery">100%</span>
+          </div>
+        </div>
+
+        <!-- Global In-App Game Header (Sankalpa & Streaks) -->
+        <header class="in-game-header">
+          <div class="sankalpa-container" title="Sankalpa: Mental Stamina & Resolve">
+            <div class="sankalpa-label-row">
+              <span class="sankalpa-title"><span class="flame-icon">🔥</span> SANKALPA (आत्मबल)</span>
+              <span class="sankalpa-value" id="sankalpaValue">100%</span>
+            </div>
+            <div class="sankalpa-track">
+              <div class="sankalpa-fill" id="sankalpaBar" style="width: 100%;"></div>
+            </div>
+          </div>
+
+          <div class="streak-pill" title="Daily Dharma Streak (Forgiveness Mechanic Enabled)">
+            <span class="streak-icon">🪷</span>
+            <div class="streak-details">
+              <span class="streak-count" id="streakCount">14</span>
+              <span class="streak-unit">Days</span>
+            </div>
+          </div>
+        </header>
+
+        <!-- SCREEN CONTAINER: Tab & State Controlled -->
+        <div class="screens-viewport">
+
+          <!-- ================= SCREEN 1: HOME DASHBOARD ================= -->
+          <section id="screenHome" class="app-screen active">
+            <!-- Hero Mentor Card -->
+            <div class="mentor-hero-card">
+              <div class="mentor-avatar-badge">
+                <div class="avatar-feather">🪶</div>
+                <div class="avatar-glow"></div>
+              </div>
+              <div class="mentor-hero-text">
+                <span class="mentor-tag">SRI KRISHNA • SARATHI</span>
+                <p class="mentor-daily-quote" id="dailyQuote">
+                  "You have a right to your actions, Partha, but never to the fruits. Do not let failure shake your courage."
+                </p>
+                <span class="shloka-ref">— Bhagavad Gita 2.47</span>
+              </div>
+            </div>
+
+            <!-- Current Trial / Level Card -->
+            <div class="trial-card">
+              <div class="trial-art-banner">
+                <img src="assets/sarathi_concept.jpg" alt="Sarathi Chariot of Resilience" class="trial-banner-img">
+                <div class="trial-banner-overlay"></div>
+              </div>
+              <div class="trial-meta">
+                <span class="level-chip">CHAPTER 3 • LEVEL 7</span>
+                <span class="difficulty-chip">FOCUS TRIAL</span>
+              </div>
+              <h2 class="trial-title">The 7 Rings of Chakravyuha</h2>
+              <p class="trial-desc">Learn how to adapt and persist when surrounded by doubts. Align the concentric rings of wisdom.</p>
+              
+              <div class="trial-stats-row">
+                <span class="stat-item"><span class="stat-dot"></span> No Game Over</span>
+                <span class="stat-item"><span class="stat-dot"></span> Mentor Guided</span>
+                <span class="stat-item"><span class="stat-dot"></span> +50 Grit Pts</span>
+              </div>
+
+              <button id="btnStartTrial" class="cta-primary-btn">
+                <span>ENTER CHAKRAVYUHA</span>
+                <span class="arrow-icon">➔</span>
+              </button>
+            </div>
+
+            <!-- Daily Dharma Quests -->
+            <div class="daily-dharma-section">
+              <div class="section-title-row">
+                <h3>Daily Dharma Quests</h3>
+                <span class="section-sub">Positive Habits</span>
+              </div>
+
+              <div class="quest-list">
+                <div class="quest-item" data-id="q1">
+                  <button class="quest-checkbox" id="checkQ1"></button>
+                  <div class="quest-info">
+                    <span class="quest-title">Morning Surya Focus</span>
+                    <span class="quest-sub">Solve 1 puzzle before homework</span>
+                  </div>
+                  <span class="quest-reward">+20 🔥</span>
+                </div>
+
+                <div class="quest-item" data-id="q2">
+                  <button class="quest-checkbox" id="checkQ2"></button>
+                  <div class="quest-info">
+                    <span class="quest-title">Maitri Kindness Deed</span>
+                    <span class="quest-sub">Help a classmate or sibling with patience</span>
+                  </div>
+                  <span class="quest-reward">+30 🪷</span>
+                </div>
+
+                <div class="quest-item" data-id="q3">
+                  <button class="quest-checkbox" id="checkQ3"></button>
+                  <div class="quest-info">
+                    <span class="quest-title">Evening Shanti Pranayama</span>
+                    <span class="quest-sub">3 minutes of guided calm breathing</span>
+                  </div>
+                  <span class="quest-reward">+25 💨</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ================= SCREEN 2: PUZZLE SCREEN (CHAKRAVYUHA) ================= -->
+          <section id="screenPuzzle" class="app-screen">
+            <div class="puzzle-header">
+              <button id="btnExitPuzzle" class="icon-round-btn" title="Back to Grove">←</button>
+              <div class="puzzle-title-box">
+                <span class="puzzle-phase">RING 3 OF 7</span>
+                <h3 class="puzzle-name">The Conduits of Dhairya (Patience)</h3>
+              </div>
+              <button id="btnCallSarathi" class="feather-call-btn" title="Call Lord Krishna for Guidance">
+                <span class="feather-glyph">🪶</span>
+                <span class="call-text">SARATHI</span>
+              </button>
+            </div>
+
+            <!-- Objective Tip -->
+            <div class="puzzle-tip-banner">
+              <span class="tip-icon">💡</span>
+              <span class="tip-text">Rotate the concentric rings to align the <strong>Golden Light Path</strong> from outer gate to inner core.</span>
+            </div>
+
+            <!-- Interactive Concentric Rings Puzzle Container -->
+            <div class="rings-puzzle-canvas-box">
+              <div class="puzzle-halo"></div>
+
+              <!-- Outer Ring -->
+              <div class="ring-wheel outer-ring" id="outerRing" style="transform: rotate(90deg);">
+                <div class="ring-glyph glyph-top">सत्य</div>
+                <div class="ring-glyph glyph-right">धैर्य</div>
+                <div class="ring-glyph glyph-bottom">शान्ति</div>
+                <div class="ring-glyph glyph-left">वीर्य</div>
+                <div class="conduit-channel channel-v"></div>
+              </div>
+
+              <!-- Middle Ring -->
+              <div class="ring-wheel middle-ring" id="middleRing" style="transform: rotate(180deg);">
+                <div class="ring-glyph glyph-top">बुद्धि</div>
+                <div class="ring-glyph glyph-right">त्याग</div>
+                <div class="ring-glyph glyph-bottom">ज्ञान</div>
+                <div class="ring-glyph glyph-left">कर्म</div>
+                <div class="conduit-channel channel-h"></div>
+              </div>
+
+              <!-- Inner Core -->
+              <div class="ring-wheel inner-core" id="innerCore">
+                <div class="core-lotus">🪷</div>
+                <div class="core-spark"></div>
+              </div>
+
+              <!-- Beam Indicator / Flow -->
+              <div class="alignment-beam" id="alignmentBeam"></div>
+            </div>
+
+            <!-- Ring Rotation Controls -->
+            <div class="ring-control-deck">
+              <div class="control-row">
+                <div class="control-unit">
+                  <span class="control-label">Outer Ring (धैर्य)</span>
+                  <div class="btn-pair">
+                    <button class="rot-btn" id="btnOuterCCW">↺ -45°</button>
+                    <button class="rot-btn" id="btnOuterCW">↻ +45°</button>
+                  </div>
+                </div>
+
+                <div class="control-unit">
+                  <span class="control-label">Middle Ring (ज्ञान)</span>
+                  <div class="btn-pair">
+                    <button class="rot-btn" id="btnMiddleCCW">↺ -45°</button>
+                    <button class="rot-btn" id="btnMiddleCW">↻ +45°</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Dharma Dilemma / Ethical Choice Action -->
+              <div class="dharma-action-card">
+                <span class="dharma-tag">DHARMA JUNCTION</span>
+                <p class="dharma-prompt">A stuck comrade signals for aid on Ring 2. What path do you choose?</p>
+                <div class="dharma-choice-buttons">
+                  <button class="dharma-btn" id="choiceRush">
+                    <strong>Hasty Bypass</strong>
+                    <small>-20% Sankalpa, Quicker</small>
+                  </button>
+                  <button class="dharma-btn highlight" id="choiceDuty">
+                    <strong>Uphold Dharma</strong>
+                    <small>Help comrade (+40% Grit)</small>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ================= SCREEN 3: THE GRANTH (LORE CODEX) ================= -->
+          <section id="screenGranth" class="app-screen">
+            <div class="granth-header">
+              <h2>The Granth (ग्रन्थ)</h2>
+              <p>Timeless Civilizational Wisdom for Modern Students</p>
+            </div>
+
+            <!-- Granth Category Filters -->
+            <div class="granth-tabs">
+              <button class="granth-tab active" data-cat="all">All</button>
+              <button class="granth-tab" data-cat="resilience">Resilience</button>
+              <button class="granth-tab" data-cat="focus">Focus</button>
+              <button class="granth-tab" data-cat="friendship">Friendship</button>
+            </div>
+
+            <!-- Granth Cards List -->
+            <div class="granth-cards-scroll" id="granthCardsList">
+              <!-- Card 1 -->
+              <article class="granth-card" data-cat="resilience">
+                <div class="card-top-meta">
+                  <span class="shloka-num">GITA 2.47 • DEDICATION</span>
+                  <span class="unlocked-badge">UNLOCKED</span>
+                </div>
+                <div class="sanskrit-box">
+                  <p class="sanskrit-text">कर्मण्येवाधिकारस्ते मा फलेषु कदाचन।<br>मा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि॥</p>
+                  <button class="audio-pronounce-btn" data-shloka="2.47" title="Listen to Sanskrit Chime">
+                    <span>🔊 Recite Shloka</span>
+                  </button>
+                </div>
+                <div class="kid-explanation">
+                  <h4>Kid-Friendly Meaning:</h4>
+                  <p>"Focus on doing your absolute best in studying and preparing. Don't freeze up by worrying about whether you will get 1st rank. Your job is honest effort; peace follows effort."</p>
+                </div>
+                <div class="real-world-task">
+                  <span class="task-badge">STUDENT CHALLENGE</span>
+                  <p>Study 20 minutes without touching your smartphone. Notice your calmness.</p>
+                </div>
+              </article>
+
+              <!-- Card 2 -->
+              <article class="granth-card" data-cat="focus">
+                <div class="card-top-meta">
+                  <span class="shloka-num">MAHABHARATA • ADI PARVA</span>
+                  <span class="unlocked-badge">UNLOCKED</span>
+                </div>
+                <div class="sanskrit-box">
+                  <p class="sanskrit-text">द्रोणः पृच्छति: किं पश्यसि? पार्थः उवाच: केवलं पक्षिणः नेत्रं पश्यामि।</p>
+                  <button class="audio-pronounce-btn" data-shloka="bird-eye" title="Listen to Sanskrit Chime">
+                    <span>🔊 Recite Shloka</span>
+                  </button>
+                </div>
+                <div class="kid-explanation">
+                  <h4>Arjuna and the Bird's Eye:</h4>
+                  <p>When Guru Drona asked the princes what they saw, others saw the tree, leaves, and sky. Arjuna answered: <em>'I see only the eye of the toy bird.'</em> That is Ekagrata (singular focus).</p>
+                </div>
+                <div class="real-world-task">
+                  <span class="task-badge">STUDENT CHALLENGE</span>
+                  <p>When practicing math or art, mute all background noises and focus on one single problem at a time.</p>
+                </div>
+              </article>
+
+              <!-- Card 3 -->
+              <article class="granth-card" data-cat="friendship">
+                <div class="card-top-meta">
+                  <span class="shloka-num">SUDAMA CHARITRA • EQUALITY</span>
+                  <span class="unlocked-badge">UNLOCKED</span>
+                </div>
+                <div class="sanskrit-box">
+                  <p class="sanskrit-text">सखा भावं विजानाति न तु वित्तं न वैभवम्।</p>
+                  <button class="audio-pronounce-btn" data-shloka="sudama" title="Listen to Sanskrit Chime">
+                    <span>🔊 Recite Shloka</span>
+                  </button>
+                </div>
+                <div class="kid-explanation">
+                  <h4>True Companionship:</h4>
+                  <p>Krishna welcomed his poor childhood friend Sudama with open arms, washing his feet with tears of joy. True friendship values character, loyalty, and heart over fancy gadgets or social status.</p>
+                </div>
+                <div class="real-world-task">
+                  <span class="task-badge">STUDENT CHALLENGE</span>
+                  <p>Include someone sitting alone during lunchtime at school tomorrow.</p>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <!-- ================= SCREEN 4: PROFILE & PROGRESS ================= -->
+          <section id="screenProfile" class="app-screen">
+            <div class="profile-hero">
+              <div class="profile-avatar-circle">
+                <span class="avatar-sym">🏹</span>
+              </div>
+              <h2 class="profile-name">Young Partha</h2>
+              <span class="profile-rank">Rank: Seeker of Resilience (Level 8)</span>
+            </div>
+
+            <div class="stats-grid">
+              <div class="stat-box">
+                <span class="stat-val" id="totalGrit">340</span>
+                <span class="stat-lbl">Grit Points</span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-val">0</span>
+                <span class="stat-lbl">Game Overs</span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-val">12</span>
+                <span class="stat-lbl">Resets Healed</span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-val">14</span>
+                <span class="stat-lbl">Day Streak</span>
+              </div>
+            </div>
+
+            <div class="antifragile-meter-card">
+              <div class="af-header">
+                <span class="af-title">Antifragility Index</span>
+                <span class="af-score">94 / 100</span>
+              </div>
+              <p class="af-desc">You bounce back 3.2x faster from puzzle roadblocks than day one!</p>
+              <div class="af-bar"><div class="af-fill" style="width: 94%;"></div></div>
+            </div>
+
+            <div class="badges-row">
+              <div class="badge-item earned" title="Never Gave Up in Chakravyuha">
+                <span class="badge-icon">🛡️</span>
+                <span class="badge-lbl">Unbroken</span>
+              </div>
+              <div class="badge-item earned" title="Pranayama Mastery">
+                <span class="badge-icon">🪷</span>
+                <span class="badge-lbl">Deep Breath</span>
+              </div>
+              <div class="badge-item earned" title="Dharma Ally">
+                <span class="badge-icon">🤝</span>
+                <span class="badge-lbl">Protector</span>
+              </div>
+              <div class="badge-item locked" title="Unlock all 18 Gita Chapters">
+                <span class="badge-icon">🔒</span>
+                <span class="badge-lbl">18 Parvas</span>
+              </div>
+            </div>
+          </section>
+
+        </div> <!-- /screens-viewport -->
+
+        <!-- ================= MODAL OVERLAY: SARATHI MODE (KRISHNA MENTOR) ================= -->
+        <div class="modal-overlay" id="sarathiModal">
+          <div class="sarathi-dialog-card">
+            <div class="krishna-portrait">
+              <div class="divine-aura"></div>
+              <div class="krishna-silhouette">
+                <span class="feather-glow">🪶</span>
+                <span class="krishna-icon">✨</span>
+              </div>
+              <span class="mentor-badge-name">SRI KRISHNA • THE CHARIOTEER</span>
+            </div>
+
+            <div class="dialogue-bubble">
+              <p id="sarathiDialogText">
+                "Partha, why look at the entire seven-layered maze and lose heart? Take one breath. The middle ring whispers a secret: when Knowledge (ज्ञान) faces Truth (सत्य), the gates unlock."
+              </p>
+            </div>
+
+            <div class="dialogue-choices">
+              <button class="mentor-choice-btn" id="choiceRiddle">
+                <span class="choice-icon">🔮</span>
+                <div class="choice-text">
+                  <strong>Give me a Socratic Riddle</strong>
+                  <small>Stimulate logical reframing</small>
+                </div>
+              </button>
+
+              <button class="mentor-choice-btn" id="choiceBreathe">
+                <span class="choice-icon">🪷</span>
+                <div class="choice-text">
+                  <strong>Guide My Breath (Pranayama)</strong>
+                  <small>Restore full Sankalpa & calm</small>
+                </div>
+              </button>
+
+              <button class="mentor-choice-btn" id="choiceReady">
+                <span class="choice-icon">⚡</span>
+                <div class="choice-text">
+                  <strong>I see it now! Let me try</strong>
+                  <small>Return with +20% focus boost</small>
+                </div>
+              </button>
+            </div>
+
+            <button class="close-modal-link" id="btnCloseSarathi">Dismiss for now</button>
+          </div>
+        </div>
+
+        <!-- ================= MODAL OVERLAY: PRANAYAMA (MINDFUL BREATHING RESET) ================= -->
+        <div class="modal-overlay" id="pranayamaModal">
+          <div class="pranayama-card">
+            <div class="pranayama-header">
+              <span class="shanti-icon">🪷</span>
+              <h3>Pranayama: Restoring Resolve</h3>
+              <p>Breathe with the sacred mandala to renew your focus</p>
+            </div>
+
+            <!-- Expanding / Contracting Breathing Ring -->
+            <div class="breathing-circle-wrapper">
+              <div class="breathing-ring" id="breathingRing">
+                <div class="breathing-mandala"></div>
+                <span class="breath-state-text" id="breathInstruction">INHALE</span>
+              </div>
+            </div>
+
+            <div class="breath-timer-display" id="breathTimer">4s</div>
+
+            <p class="breath-affirmation" id="breathAffirmation">
+              "A setback is merely a breath before your next great leap."
+            </p>
+
+            <button class="cta-primary-btn" id="btnFinishPranayama" style="display: none;">
+              <span>SANKALPA RESTORED (100%)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- ================= MODAL OVERLAY: VICTORY & INSIGHT MODAL ================= -->
+        <div class="modal-overlay" id="victoryModal">
+          <div class="victory-card">
+            <div class="victory-starburst">✨</div>
+            <div class="victory-lotus">🪷</div>
+            <span class="victory-chip">TRIAL CONQUERED</span>
+            <h3>The Path of Dhairya Unlocked!</h3>
+            <p>You did not give up. You aligned the sacred conduits through patience and duty.</p>
+
+            <div class="rewards-summary">
+              <div class="reward-pill">+50 Sankalpa Max</div>
+              <div class="reward-pill">+100 Grit Points</div>
+              <div class="reward-pill">New Granth Lore</div>
+            </div>
+
+            <button class="cta-primary-btn" id="btnClaimVictory">
+              <span>RETURN TO SHANTI GROVE</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- In-Phone Bottom Navigation Bar -->
+        <nav class="bottom-nav-bar">
+          <button class="nav-tab active" data-target="screenHome" id="tabHome">
+            <span class="nav-icon">🏛️</span>
+            <span class="nav-label">Grove</span>
+          </button>
+          <button class="nav-tab" data-target="screenPuzzle" id="tabPuzzle">
+            <span class="nav-icon">⚔️</span>
+            <span class="nav-label">Trial</span>
+          </button>
+          <button class="nav-tab" data-target="screenGranth" id="tabGranth">
+            <span class="nav-icon">📜</span>
+            <span class="nav-label">Granth</span>
+          </button>
+          <button class="nav-tab" data-target="screenProfile" id="tabProfile">
+            <span class="nav-icon">🏹</span>
+            <span class="nav-label">Resolve</span>
+          </button>
+        </nav>
+
+      </main> <!-- /phone-viewport -->
+    </div> <!-- /mobile-device-frame -->
+
+    <!-- Side Panel: Interactive Concept Guide for Evaluators / Hackathons -->
+    <aside class="concept-side-panel">
+      <div class="panel-card">
+        <div class="panel-header">
+          <span class="panel-icon">💡</span>
+          <h3>Evaluator Sandbox & GDD Guide</h3>
+        </div>
+        <p class="panel-intro">Experience the core psychological mechanics built to replace toxic gaming loops with emotional resilience.</p>
+
+        <!-- Concept Art Showcase -->
+        <div class="concept-art-preview">
+          <img src="assets/sarathi_concept.jpg" alt="Sarathi: Sri Krishna guiding the young archer" class="concept-thumb">
+          <div class="concept-art-caption">
+            <span>Concept Art: Sri Krishna & Young Partha on the Chariot of Resilience</span>
+          </div>
+        </div>
+
+        <div class="demo-actions-group">
+          <h4>🧪 Live Interaction Triggers</h4>
+          <button class="demo-btn" id="triggerDepleteSankalpa">
+            <span class="demo-emoji">⚡</span>
+            <span>Simulate Low Resolve (Triggers Mentor)</span>
+          </button>
+          <button class="demo-btn" id="triggerPranayamaDirect">
+            <span class="demo-emoji">🪷</span>
+            <span>Launch Pranayama Reset Mini-Game</span>
+          </button>
+          <button class="demo-btn" id="triggerKrishnaAdvice">
+            <span class="demo-emoji">🪶</span>
+            <span>Summon "Sarathi Mode" Overlay</span>
+          </button>
+          <button class="demo-btn" id="triggerAutoSolve">
+            <span class="demo-emoji">🎯</span>
+            <span>Auto-Align Concentric Rings (Win State)</span>
+          </button>
+        </div>
+
+        <div class="philosophy-highlights">
+          <h4>🏛️ Core Design Principles</h4>
+          <ul>
+            <li><strong>No Game Over Screen:</strong> Setbacks trigger mindfulness and Socratic clues rather than punitive failure.</li>
+            <li><strong>Sankalpa Over HP:</strong> Mental stamina replaces combat violence.</li>
+            <li><strong>Forgiveness Streaks:</strong> Missed days heal through short reflections, eradicating anxiety-driven FOMO.</li>
+          </ul>
+        </div>
+      </div>
+    </aside>
+
+  </div> <!-- /app-wrapper -->
+
+  <!-- Toast Notification System -->
+  <div class="toast-shelf" id="toastShelf"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

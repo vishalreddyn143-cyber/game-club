@@ -1,0 +1,20 @@
+{
+  "name": "sarathi-mobile-prototype",
+  "version": "1.0.0",
+  "description": "Interactive mobile prototype and Game Design Document for Sarathi: The Path of Resilience",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx -y serve . -l 3000",
+    "dev": "npx -y serve . -l 3000"
+  },
+  "keywords": [
+    "educational-game",
+    "mahabharata",
+    "growth-mindset",
+    "sel",
+    "resilience",
+    "sarathi"
+  ],
+  "author": "Sarathi Game Studio",
+  "license": "MIT"
+}
